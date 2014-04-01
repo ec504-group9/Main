@@ -30,22 +30,36 @@ public class Main {
                     break;
                     
                 case "encode":
-                    if (!"--output".equals(args[argsLength - 2])){  // if "--output" flag not found, exit encoding
-                        System.out.println("Output file not specified.");
+                    
+                    if (argsLength < 4 && !"--output".equals(args[argsLength - 2])){  // if "--output" flag not found, exit encoding
+                        System.out.println("Command format invalid. No '--output' flag found or not enough arguments entered.");
                         System.out.println("Encoding failed. Exiting program...");
                     }
-                    else {  // pass all filenames to encode function
-                        String[] imageFiles;
-                        imageFiles = new String [argsLength - 3];
+                    else {
+                        
+                        // check if output file has correct filename extension
                         String outputFilename = args[argsLength - 1];
+                        int outputFileLength = outputFilename.length();
+                        String thisFileExtension;
+                        thisFileExtension = new String (outputFilename.substring(outputFileLength - EXTENSIONLength, outputFileLength));
                         
-                        for (int ii = 1; ii < argsLength - 2; ii++){
-                            imageFiles[ii - 1] = args[ii];
+                        if (EXTENSION.equals(thisFileExtension) && outputFilename.length() > EXTENSIONLength){
+                            
+                            // pass all filenames to encode function
+                            String[] imageFiles;
+                            imageFiles = new String [argsLength - 3];
+
+                            for (int ii = 1; ii < argsLength - 2; ii++){
+                                imageFiles[ii - 1] = args[ii];
+                            }
+                            
+                            System.out.println("Encoding started...");
+                            //encode(imageFiles, outputFilename);
+                            System.out.println("Encoding completed...");
                         }
-                        
-                        System.out.println("Encoding started...");
-                        encode(imageFiles, outputFilename);
-                        System.out.println("Encoding completed...");
+                        else {
+                            System.out.println("Output file must be specified with extension " + EXTENSION + " Please try again. Exiting program...");
+                        }
                     }
                     break;
                     
@@ -62,8 +76,8 @@ public class Main {
                         thisFileExtension = new String (outputFilename.substring(outputFileLength - EXTENSIONLength, outputFileLength));
                         
                         if (EXTENSION.equals(thisFileExtension)){
-                            System.out.println("Viewing launching...");
-                            view(outputFilename);
+                            System.out.println("Viewer launching...");
+                            //view(outputFilename);
                         }
                         else {
                             System.out.println("Output file must be a " + EXTENSION + " file. Please try again. Exiting program...");

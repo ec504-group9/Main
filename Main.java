@@ -43,7 +43,7 @@ public class Main {
                         String thisFileExtension;
                         thisFileExtension = new String (outputFilename.substring(outputFileLength - EXTENSIONLength, outputFileLength));
                         
-                        if (EXTENSION.equals(thisFileExtension) && outputFilename.length() > EXTENSIONLength){
+                        if (EXTENSION.equals(thisFileExtension) && outputFileLength > EXTENSIONLength){
                             
                             // pass all filenames to encode function
                             String[] imageFiles;
